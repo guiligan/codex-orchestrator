@@ -1,6 +1,6 @@
 # Install Orchestrator for Codex
 
-This is a first-party installation bundle. It is not an official marketplace plugin. No license has been specified. The installer is publicly hosted on GitHub; the Orchestrator website remains private.
+This is a first-party installation bundle. It is not an official marketplace plugin. No license has been specified. The installer is publicly hosted on GitHub.
 
 ## One-command install
 
@@ -14,7 +14,7 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/guiligan/codex
 
 The command downloads the installer to a temporary directory, verifies its SHA-256 checksum, runs it, and removes the temporary download. No GitHub login or browser download is required.
 
-You can inspect the [installation files on GitHub](https://github.com/guiligan/codex-orchestrator/tree/v1.1.0) first. If you prefer a browser download from the private site, save `install-orchestrator.cjs` and run it with its actual path:
+You can inspect the [installation files on GitHub](https://github.com/guiligan/codex-orchestrator) first. If you prefer a browser download from the website, save `install-orchestrator.cjs` and run it with its actual path:
 
 ```sh
 node /actual/path/install-orchestrator.cjs
@@ -26,7 +26,7 @@ When the command finishes, open `/hooks` in Codex, review and trust the Orchestr
 
 ## Manual fallback from the ZIP
 
-The ZIP offered on the private website also contains the readable runtime, planner skill, hook snippet, and this installer. To install manually, extract it into a stable directory, run `npm ci` inside `delegation-selector`, copy `delegation-planner/SKILL.md` to `~/.agents/skills/delegation-planner/SKILL.md`, and register the server with actual absolute paths:
+The ZIP offered on the website also contains the readable runtime, planner skill, hook snippet, and this installer. To install manually, extract it into a stable directory, run `npm ci` inside `delegation-selector`, copy `delegation-planner/SKILL.md` to `~/.agents/skills/delegation-planner/SKILL.md`, and register the server with actual absolute paths:
 
 ```sh
 codex mcp add delegation-selector -- /absolute/path/to/node /absolute/path/to/delegation-selector/server.mjs --stdio
