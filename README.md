@@ -9,7 +9,7 @@ Requirements: macOS or Linux, Bash, curl, Node.js 22 or newer with npm, and the 
 Run this command to download and install Orchestrator:
 
 ```sh
-bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/guiligan/codex-orchestrator/v1.1.0/install.sh | bash'
+bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/guiligan/codex-orchestrator/v1.2.0/install.sh | bash'
 ```
 
 The command downloads the installer to a temporary directory, verifies its SHA-256 checksum, runs it, and removes the temporary download. No GitHub login or browser download is required.
@@ -23,6 +23,12 @@ node /actual/path/install-orchestrator.cjs
 The installer verifies its embedded files, installs locked runtime dependencies, places the selector under `CODEX_HOME` (or `~/.codex`), installs the shared planner skill under `~/.agents`, merges one prompt hook without replacing unrelated hook settings, and registers the selector with the Codex CLI. Existing files that it replaces are backed up under `CODEX_HOME/backups/orchestrator`.
 
 When the command finishes, open `/hooks` in Codex, review and trust the Orchestrator hook, then restart Codex and start a new chat. This final trust step is required by Codex.
+
+## Models and host compatibility
+
+Version 1.2.0 updates the editable starting preferences to `gpt-6.1-sol` for implementation and design, `gpt-6-luna` for focused exploration and research, and `gpt-6-astra` for independent review. `gpt-6.1-terra` and `gpt-6-sol` are selectable alternatives when supported by your host. These are preferences, not benchmark or cost guarantees.
+
+The active Codex runtime supplies the available models and reasoning efforts for each proposal; the bundled demo is only an example catalog. Valid catalogs from older hosts remain supported. `gpt-6.1-terra` requires Codex CLI 0.159.0 or later when using the CLI; other hosts may expose different choices. Updating Orchestrator does not upgrade Codex or grant model access.
 
 ## Manual fallback from the ZIP
 
