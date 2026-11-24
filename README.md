@@ -9,7 +9,7 @@ Requirements: macOS or Linux, Bash, curl, Node.js 22 or newer with npm, and the 
 Run this command to download and install Orchestrator:
 
 ```sh
-bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/guiligan/codex-orchestrator/v1.2.0/install.sh | bash'
+bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/guiligan/codex-orchestrator/v1.3.0/install.sh | bash'
 ```
 
 The command downloads the installer to a temporary directory, verifies its SHA-256 checksum, runs it, and removes the temporary download. No GitHub login or browser download is required.
@@ -24,15 +24,17 @@ The installer verifies its embedded files, installs locked runtime dependencies,
 
 When the command finishes, open `/hooks` in Codex, review and trust the Orchestrator hook, then restart Codex and start a new chat. This final trust step is required by Codex.
 
-## Models and host compatibility
+## Models and optional skills
 
-Version 1.2.0 updates the editable starting preferences to `gpt-6.1-sol` for implementation and design, `gpt-6-luna` for focused exploration and research, and `gpt-6-astra` for independent review. `gpt-6.1-terra` and `gpt-6-sol` are selectable alternatives when supported by your host. These are preferences, not benchmark or cost guarantees.
+The planner uses the capabilities and reasoning efforts reported by your Codex runtime to recommend settings for each assignment. You can edit those recommendations. The bundled demo uses an example catalog. If the selector cannot offer verified settings for your host, choose your team in chat.
 
-The active Codex runtime supplies the available models and reasoning efforts for each proposal; the bundled demo is only an example catalog. Valid catalogs from older hosts remain supported. `gpt-6.1-terra` requires Codex CLI 0.159.0 or later when using the CLI; other hosts may expose different choices. Updating Orchestrator does not upgrade Codex or grant model access.
+For code changes, the planner can use relevant `pstack-plugin` skills. For code review, it uses `thermo-nuclear-code-quality-review` when available. Both integrations are optional and use skills you already have access to.
 
 ## Manual fallback from the ZIP
 
-The ZIP offered on the website also contains the readable runtime, planner skill, hook snippet, and this installer. To install manually, extract it into a stable directory, run `npm ci` inside `delegation-selector`, copy `delegation-planner/SKILL.md` to `~/.agents/skills/delegation-planner/SKILL.md`, and register the server with actual absolute paths:
+For a locally built ZIP, extract it and run `node install-orchestrator.cjs` from the extracted directory. The one-command shell installer targets the published release. A newly built shell installer needs the matching release files to be published before it can verify the remote download.
+
+The ZIP also contains the readable runtime, planner skill, and hook snippet. To install those pieces manually, extract the ZIP into a stable directory, run `npm ci` inside `delegation-selector`, copy `delegation-planner/SKILL.md` to `~/.agents/skills/delegation-planner/SKILL.md`, and register the server with actual absolute paths:
 
 ```sh
 codex mcp add delegation-selector -- /absolute/path/to/node /absolute/path/to/delegation-selector/server.mjs --stdio
